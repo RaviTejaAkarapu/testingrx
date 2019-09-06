@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">testingrx</string>
+    <string name="error_text">an error occured while loading data</string>
+</resources>
