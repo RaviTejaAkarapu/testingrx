@@ -1,4 +1,4 @@
-package com.testingrx
+package com.testingrx.model
 
 import com.google.gson.annotations.SerializedName
 

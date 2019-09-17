@@ -1,16 +1,25 @@
-package com.testingrx
+package com.testingrx.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import io.reactivex.Scheduler
+import com.testingrx.di.DaggerApiComponent
+import com.testingrx.model.Country
+import com.testingrx.model.CountryService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 class ListViewModel: ViewModel() {
 
-    private val countryService = CountryService()
+    @Inject
+    lateinit var countryService: CountryService
+
+    init {
+        DaggerApiComponent.create().inject(this)
+    }
+
     private val disposable = CompositeDisposable()
 
     val countries = MutableLiveData<List<Country>>()

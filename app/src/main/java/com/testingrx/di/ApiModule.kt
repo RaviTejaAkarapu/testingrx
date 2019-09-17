@@ -1,17 +1,21 @@
-package com.testingrx
+package com.testingrx.di
 
-import io.reactivex.Single
+import com.testingrx.model.CountryApi
+import com.testingrx.model.CountryService
+import dagger.Module
+import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class CountryService {
+@Module
+class ApiModule {
 
     private val BASE_URL = "https://raw.githubusercontent.com"
-    private val api: CountryApi
 
-    init{
-        api = Retrofit.Builder()
+    @Provides
+    fun provideCountriesApi(): CountryApi {
+        return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -19,7 +23,8 @@ class CountryService {
             .create(CountryApi::class.java)
     }
 
-    fun getCountries(): Single<List<Country>>{
-        return api.getCountries()
+    @Provides
+    fun provideCountryService(): CountryService {
+        return CountryService()
     }
 }

@@ -1,5 +1,6 @@
-package com.testingrx
+package com.testingrx.model
 
+import com.testingrx.model.Country
 import io.reactivex.Single
 import retrofit2.http.GET
 
